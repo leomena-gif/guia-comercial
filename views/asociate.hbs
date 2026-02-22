@@ -14,6 +14,18 @@
     <label class="form-label">Descripción del servicio</label>
     <textarea class="form-control" name="descripcion" rows="3"></textarea>
   </div>
+  <div class="mb-3">
+    <label class="form-label">Teléfono</label>
+    <input type="text" class="form-control" name="telefono" placeholder="Ej: 3512345678" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" name="email" placeholder="tu@email.com" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Sitio web <span class="text-muted">(opcional)</span></label>
+    <input type="url" class="form-control" name="web" placeholder="https://...">
+  </div>
   <button type="submit" class="btn btn-primary w-100">Enviar solicitud</button>
 
   {{#if message}}

@@ -19,6 +19,14 @@
       <label class="form-label">Email</label>
       <input type="email" class="form-control" name="email">
     </div>
+    <div class="mb-3">
+      <label class="form-label">Teléfono</label>
+      <input type="text" class="form-control" name="telefono" placeholder="Ej: 3512345678">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Sitio web (opcional)</label>
+      <input type="url" class="form-control" name="web" placeholder="https://...">
+    </div>
     <button type="submit" class="btn btn-success w-100">Agregar a la Guía</button>
   </form>
   {{#if message}}
@@ -34,6 +42,8 @@
       <th>Nombre</th>
       <th>Rubro</th>
       <th>Descripción</th>
+      <th>Teléfono</th>
+      <th>Contacto</th>
       <th>Acciones</th>
     </tr>
   </thead>
@@ -44,6 +54,10 @@
       <td>{{nombre}}</td>
       <td>{{rubro}}</td>
       <td>{{descripcion}}</td>
+      <td>{{telefono}}</td>
+      <td>
+        {{#if web}}<a href="{{web}}" target="_blank">Web</a>{{else if email}}<a href="mailto:{{email}}">Email</a>{{/if}}
+      </td>
       <td>
         <form action="/admin/eliminar/{{id}}" method="POST" style="display:inline">
           <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

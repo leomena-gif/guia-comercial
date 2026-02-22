@@ -66,12 +66,15 @@ router.post('/asociate', async function(req, res, next) {
   var nombre = req.body.nombre;
   var rubro = req.body.rubro;
   var descripcion = req.body.descripcion;
+  var telefono = req.body.telefono;
+  var email = req.body.email;
+  var web = req.body.web;
 
   var obj = {
     from: 'guiacomercial@test.com',
     to: 'tu_correo@gmail.com',
     subject: 'Nueva solicitud de asociado - Guía Comercial',
-    html: '<b>Nombre:</b> ' + nombre + '<br><b>Rubro:</b> ' + rubro + '<br><b>Descripción:</b> ' + descripcion
+    html: '<b>Nombre:</b> ' + nombre + '<br><b>Rubro:</b> ' + rubro + '<br><b>Descripción:</b> ' + descripcion + '<br><b>Teléfono:</b> ' + telefono + '<br><b>Email:</b> ' + email + (web ? '<br><b>Web:</b> ' + web : '')
   };
 
   var transporter = nodemailer.createTransport({
@@ -110,10 +113,12 @@ router.post('/admin', function(req, res, next) {
   var rubro = req.body.rubro;
   var descripcion = req.body.descripcion;
   var email = req.body.email;
+  var telefono = req.body.telefono;
+  var web = req.body.web;
 
   db.query(
-    'INSERT INTO profesionales (nombre, rubro, descripcion, email) VALUES (?, ?, ?, ?)',
-    [nombre, rubro, descripcion, email],
+    'INSERT INTO profesionales (nombre, rubro, descripcion, email, telefono, web) VALUES (?, ?, ?, ?, ?, ?)',
+    [nombre, rubro, descripcion, email, telefono || null, web || null],
     function(err, results) {
       if (err) return next(err);
       db.query('SELECT * FROM profesionales', function(err, profesionales) {

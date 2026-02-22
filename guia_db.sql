@@ -54,17 +54,19 @@ CREATE TABLE `profesionales` (
   `nombre` varchar(100) NOT NULL,
   `rubro` varchar(100) NOT NULL,
   `descripcion` text,
-  `email` varchar(100) DEFAULT NULL
+  `email` varchar(100) DEFAULT NULL,
+  `telefono` varchar(30) DEFAULT NULL,
+  `web` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `profesionales`
 --
 
-INSERT INTO `profesionales` (`id`, `nombre`, `rubro`, `descripcion`, `email`) VALUES
-(1, 'Dr. Martín López', 'Salud', 'Médico clínico con 10 años de experiencia', 'martin@email.com'),
-(2, 'Panadería El Sol', 'Gastronomía', 'Pan artesanal y facturas todos los días', 'elsol@email.com'),
-(3, 'Estudio Arq. Pérez', 'Arquitectura', 'Diseño y construcción de viviendas', 'perez@email.com');
+INSERT INTO `profesionales` (`id`, `nombre`, `rubro`, `descripcion`, `email`, `telefono`, `web`) VALUES
+(1, 'Dr. Martín López', 'Salud', 'Médico clínico con 10 años de experiencia', 'martin@email.com', '3512345678', NULL),
+(2, 'Panadería El Sol', 'Gastronomía', 'Pan artesanal y facturas todos los días', 'elsol@email.com', '3519876543', 'https://panaderiaelsol.com'),
+(3, 'Estudio Arq. Pérez', 'Arquitectura', 'Diseño y construcción de viviendas', 'perez@email.com', '3516543210', NULL);
 
 --
 -- Índices para tablas volcadas

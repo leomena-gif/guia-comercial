@@ -8,6 +8,16 @@
           <h5 class="card-title">{{nombre}}</h5>
           <span class="badge bg-info text-dark mb-2">{{rubro}}</span>
           <p class="card-text">{{descripcion}}</p>
+          {{#if telefono}}
+            <p class="card-text mb-1">
+              <small class="text-muted"><i class="bi bi-telephone"></i> {{telefono}}</small>
+            </p>
+          {{/if}}
+          {{#if web}}
+            <a href="{{web}}" target="_blank" class="btn btn-outline-primary btn-sm mt-2">Visitar sitio web</a>
+          {{else if email}}
+            <a href="mailto:{{email}}" class="btn btn-outline-secondary btn-sm mt-2">Enviar email</a>
+          {{/if}}
         </div>
       </div>
     </div>
