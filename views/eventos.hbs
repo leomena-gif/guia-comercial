@@ -1,0 +1,15 @@
+<h2 class="text-center mb-4">Eventos y Cartelera Local</h2>
+
+<div class="row">
+  {{#each eventos}}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{titulo}}</h5>
+          <p class="card-text">{{descripcion}}</p>
+          <span class="badge bg-primary">{{fecha}}</span>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>

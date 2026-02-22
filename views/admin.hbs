@@ -1,0 +1,55 @@
+<h2 class="text-center mb-4">Panel de Administración</h2>
+
+<div class="card p-4 shadow-sm mb-5 w-50 mx-auto">
+  <h5 class="mb-3">Agregar nuevo profesional</h5>
+  <form action="/admin" method="POST">
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input type="text" class="form-control" name="nombre" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Rubro</label>
+      <input type="text" class="form-control" name="rubro" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Descripción</label>
+      <textarea class="form-control" name="descripcion" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" name="email">
+    </div>
+    <button type="submit" class="btn btn-success w-100">Agregar a la Guía</button>
+  </form>
+  {{#if message}}
+    <div class="alert alert-success mt-3 text-center">{{message}}</div>
+  {{/if}}
+</div>
+
+<h5 class="mb-3">Profesionales registrados</h5>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Rubro</th>
+      <th>Descripción</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each profesionales}}
+    <tr>
+      <td>{{id}}</td>
+      <td>{{nombre}}</td>
+      <td>{{rubro}}</td>
+      <td>{{descripcion}}</td>
+      <td>
+        <form action="/admin/eliminar/{{id}}" method="POST" style="display:inline">
+          <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

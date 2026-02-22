@@ -1,0 +1,25 @@
+<h2 class="text-center mb-4">Suma tu comercio o servicio</h2>
+<p class="text-center text-muted mb-4">Completa el formulario y llegá a más clientes. (Sujeto a moderación)</p>
+
+<form action="/asociate" method="POST" class="w-50 mx-auto card p-4 shadow-sm">
+  <div class="mb-3">
+    <label class="form-label">Nombre del profesional o comercio</label>
+    <input type="text" class="form-control" name="nombre" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Rubro</label>
+    <input type="text" class="form-control" name="rubro" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Descripción del servicio</label>
+    <textarea class="form-control" name="descripcion" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary w-100">Enviar solicitud</button>
+
+  {{#if message}}
+  <div class="alert alert-success mt-3 text-center" role="alert">
+    {{message}}
+  </div>
+{{/if}}
+
+</form>

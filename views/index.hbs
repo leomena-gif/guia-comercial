@@ -1,0 +1,15 @@
+<h1 class="text-center mb-4">Directorio de Profesionales y Comercios</h1>
+
+<div class="row">
+  {{#each profesionales}}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{nombre}}</h5>
+          <span class="badge bg-info text-dark mb-2">{{rubro}}</span>
+          <p class="card-text">{{descripcion}}</p>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>

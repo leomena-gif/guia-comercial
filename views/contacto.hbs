@@ -1,0 +1,23 @@
+<h2 class="text-center mb-4">Contacto y Soporte</h2>
+<p class="text-center mb-4">¿Encontraste un error o quieres dar de baja tu anuncio? Escríbenos.</p>
+
+<form action="/contacto" method="POST" class="w-50 mx-auto card p-4 shadow-sm">
+  <div class="mb-3">
+    <label class="form-label">Tu Nombre</label>
+    <input type="text" class="form-control" name="nombre" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" name="email" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Mensaje</label>
+    <textarea class="form-control" name="mensaje" rows="4" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-success w-100">Enviar Mensaje</button>
+  {{#if message}}
+  <div class="alert alert-success mt-3 text-center" role="alert">
+    {{message}}
+  </div>
+{{/if}}
+</form>

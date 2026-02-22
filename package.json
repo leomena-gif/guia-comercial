@@ -1,0 +1,20 @@
+{
+  "name": "guia-comercial",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^17.3.1",
+    "express": "^4.22.1",
+    "express-session": "^1.19.0",
+    "hbs": "^4.2.0",
+    "http-errors": "~1.6.3",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.17.4",
+    "nodemailer": "^8.0.1"
+  }
+}
