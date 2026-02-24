@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Module dependencies.
+ * Dependencias del módulo.
  */
 
 var app = require('../app');
@@ -9,20 +9,20 @@ var debug = require('debug')('guia-comercial:server');
 var http = require('http');
 
 /**
- * Get port from environment and store in Express.
+ * Obtener el puerto desde el entorno y almacenarlo en Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Crear el servidor HTTP.
  */
 
 var server = http.createServer(app);
 
 /**
- * Listen on provided port, on all network interfaces.
+ * Escuchar en el puerto indicado, en todas las interfaces de red.
  */
 
 server.listen(port);
@@ -30,19 +30,19 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 /**
- * Normalize a port into a number, string, or false.
+ * Normalizar un puerto en número, string o false.
  */
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
-    // named pipe
+    // pipe con nombre
     return val;
   }
 
   if (port >= 0) {
-    // port number
+    // número de puerto
     return port;
   }
 
@@ -50,7 +50,7 @@ function normalizePort(val) {
 }
 
 /**
- * Event listener for HTTP server "error" event.
+ * Listener del evento "error" del servidor HTTP.
  */
 
 function onError(error) {
@@ -60,16 +60,16 @@ function onError(error) {
 
   var bind = typeof port === 'string'
     ? 'Pipe ' + port
-    : 'Port ' + port;
+    : 'Puerto ' + port;
 
-  // handle specific listen errors with friendly messages
+  // manejar errores específicos de escucha con mensajes descriptivos
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+      console.error(bind + ' requiere privilegios elevados');
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+      console.error(bind + ' ya está en uso');
       process.exit(1);
       break;
     default:
@@ -78,13 +78,13 @@ function onError(error) {
 }
 
 /**
- * Event listener for HTTP server "listening" event.
+ * Listener del evento "listening" del servidor HTTP.
  */
 
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+    : 'puerto ' + addr.port;
+  debug('Escuchando en ' + bind);
 }

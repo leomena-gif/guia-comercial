@@ -118,6 +118,9 @@
               </div>
             </td>
             <td>
+              <a href="/admin/editar/{{id}}" class="gc-btn gc-btn-warning gc-btn-sm" style="margin-bottom:4px;display:inline-block;">
+                <i class="bi bi-pencil"></i> Editar
+              </a>
               <form action="/admin/eliminar/{{id}}" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que querés eliminar este registro?');">
                 <button type="submit" class="gc-btn gc-btn-danger gc-btn-sm">
                   <i class="bi bi-trash3"></i> Eliminar
@@ -150,4 +153,3 @@
     });
   }
 </script>
-

@@ -1,0 +1,46 @@
+<div class="gc-form-page">
+  <div class="gc-form-header">
+    <h2>Editar profesional</h2>
+    <p>Modificá los datos del registro y guardá los cambios.</p>
+  </div>
+
+  <div class="gc-form-card">
+    <form action="/admin/editar/{{profesional.id}}" method="POST">
+
+      <div class="gc-field">
+        <label class="gc-label">Nombre</label>
+        <input type="text" class="gc-input" name="nombre" value="{{profesional.nombre}}" required>
+      </div>
+
+      <div class="gc-field">
+        <label class="gc-label">Rubro</label>
+        <input type="text" class="gc-input" name="rubro" value="{{profesional.rubro}}" required>
+      </div>
+
+      <div class="gc-field">
+        <label class="gc-label">Descripción <span>(opcional)</span></label>
+        <textarea class="gc-textarea" name="descripcion">{{profesional.descripcion}}</textarea>
+      </div>
+
+      <div class="gc-field">
+        <label class="gc-label">Teléfono</label>
+        <input type="text" class="gc-input" name="telefono" value="{{profesional.telefono}}" required>
+      </div>
+
+      <div class="gc-field">
+        <label class="gc-label">Email <span>(opcional)</span></label>
+        <input type="email" class="gc-input" name="email" value="{{profesional.email}}">
+      </div>
+
+      <div class="gc-field">
+        <label class="gc-label">Sitio web <span>(opcional)</span></label>
+        <input type="url" class="gc-input" name="web" value="{{profesional.web}}" placeholder="https://...">
+      </div>
+
+      <div style="display:flex;gap:12px;">
+        <button type="submit" class="gc-btn gc-btn-primary">Guardar cambios</button>
+        <a href="/admin" class="gc-btn gc-btn-outline">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>

@@ -13,6 +13,10 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/nosotros', function(req, res, next) {
+  res.render('nosotros', { isNosotros: true });
+});
+
 router.get('/asociate', function(req, res, next) {
   res.render('asociate', { isAsociate: true });
 });
@@ -147,6 +151,37 @@ router.post('/login', function(req, res) {
 router.get('/salir', function(req, res, next) {
   req.session.destroy();
   res.redirect('/login');
+});
+
+/* GET editar profesional. */
+router.get('/admin/editar/:id', function(req, res, next) {
+  if (!req.session.admin) return res.redirect('/login');
+  var id = req.params.id;
+  db.query('SELECT * FROM profesionales WHERE id = ?', [id], function(err, results) {
+    if (err) return next(err);
+    res.render('editar', { profesional: results[0] });
+  });
+});
+
+/* POST editar profesional. */
+router.post('/admin/editar/:id', function(req, res, next) {
+  if (!req.session.admin) return res.redirect('/login');
+  var id = req.params.id;
+  var nombre = req.body.nombre;
+  var rubro = req.body.rubro;
+  var descripcion = req.body.descripcion;
+  var telefono = req.body.telefono;
+  var email = req.body.email;
+  var web = req.body.web;
+
+  db.query(
+    'UPDATE profesionales SET nombre=?, rubro=?, descripcion=?, telefono=?, email=?, web=? WHERE id=?',
+    [nombre, rubro, descripcion, telefono, email, web, id],
+    function(err) {
+      if (err) return next(err);
+      res.redirect('/admin');
+    }
+  );
 });
 
 module.exports = router;
