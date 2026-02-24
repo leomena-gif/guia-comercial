@@ -24,28 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `eventos`
---
-
-CREATE TABLE `eventos` (
-  `id` int NOT NULL,
-  `titulo` varchar(150) NOT NULL,
-  `descripcion` text,
-  `fecha` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Volcado de datos para la tabla `eventos`
---
-
-INSERT INTO `eventos` (`id`, `titulo`, `descripcion`, `fecha`) VALUES
-(1, 'Feria de Emprendedores', 'Muestra de productos locales y networking', '2026-03-15'),
-(2, 'Taller de Marketing Digital', 'Aprendé a promocionar tu negocio online', '2026-03-22'),
-(3, 'Festival Gastronómico', 'Los mejores sabores de la ciudad', '2026-04-05');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `profesionales`
 --
 
@@ -55,7 +33,7 @@ CREATE TABLE `profesionales` (
   `rubro` varchar(100) NOT NULL,
   `descripcion` text,
   `email` varchar(100) DEFAULT NULL,
-  `telefono` varchar(30) DEFAULT NULL,
+  `telefono` varchar(30) NOT NULL,
   `web` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -64,19 +42,20 @@ CREATE TABLE `profesionales` (
 --
 
 INSERT INTO `profesionales` (`id`, `nombre`, `rubro`, `descripcion`, `email`, `telefono`, `web`) VALUES
-(1, 'Dr. Martín López', 'Salud', 'Médico clínico con 10 años de experiencia', 'martin@email.com', '3512345678', NULL),
-(2, 'Panadería El Sol', 'Gastronomía', 'Pan artesanal y facturas todos los días', 'elsol@email.com', '3519876543', 'https://panaderiaelsol.com'),
-(3, 'Estudio Arq. Pérez', 'Arquitectura', 'Diseño y construcción de viviendas', 'perez@email.com', '3516543210', NULL);
+(1, 'Dr. Martín López', 'Salud', 'Médico clínico con más de 10 años de experiencia en medicina general', 'martin@email.com', '3512345678', NULL),
+(2, 'Panadería El Sol', 'Gastronomía', 'Pan artesanal, facturas y medialunas todos los días desde las 6 AM', 'elsol@email.com', '3519876543', 'https://panaderiaelsol.com'),
+(3, 'Estudio Arq. Pérez', 'Arquitectura', 'Diseño, dirección y construcción de viviendas y locales comerciales', 'perez@email.com', '3516543210', NULL),
+(4, 'Estudio Jurídico Gómez', 'Derecho', 'Asesoramiento legal en derecho laboral, civil y societario', 'gomez@estudiojuridico.com', '3514567890', 'https://estudiogomez.com.ar'),
+(5, 'Cont. Sandra Ruiz', 'Contabilidad', 'Contadora pública. Monotributo, sociedades y liquidación de sueldos', 'sandra.ruiz@contadora.com', '3518765432', NULL),
+(6, 'Academia Inglés Plus', 'Educación', 'Clases de inglés para todas las edades, niveles básico a avanzado', 'info@inglesplus.com', '3513456789', 'https://inglesplus.com'),
+(7, 'TechSoluciones', 'Tecnología', 'Desarrollo web, soporte técnico y reparación de equipos informáticos', 'contacto@techsoluciones.com', '3511234567', 'https://techsoluciones.com.ar'),
+(8, 'Estética Valeria', 'Belleza', 'Corte, coloración, tratamientos capilares y manicuría. Turno previo', NULL, '3517654321', NULL),
+(9, 'Mecánica El Turbo', 'Automotriz', 'Service, reparación general y diagnóstico computarizado de vehículos', 'elturbo@mecanica.com', '3512398765', NULL),
+(10, 'Inmobiliaria Norte', 'Inmobiliaria', 'Venta y alquiler de propiedades en zona norte. Tasaciones sin cargo', 'ventas@inmobiliarianorte.com', '3519871234', 'https://inmobiliarianorte.com.ar');
 
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `eventos`
---
-ALTER TABLE `eventos`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `profesionales`
@@ -89,16 +68,10 @@ ALTER TABLE `profesionales`
 --
 
 --
--- AUTO_INCREMENT de la tabla `eventos`
---
-ALTER TABLE `eventos`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT de la tabla `profesionales`
 --
 ALTER TABLE `profesionales`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

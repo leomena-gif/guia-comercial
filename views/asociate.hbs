@@ -1,37 +1,56 @@
-<h2 class="text-center mb-4">Suma tu comercio o servicio</h2>
-<p class="text-center text-muted mb-4">Completa el formulario y llegá a más clientes. (Sujeto a moderación)</p>
+<div class="gc-form-page">
+  <div class="gc-form-header">
+    <h2>Sumá tu comercio</h2>
+    <p>Completá el formulario y llegá a más clientes. Tu solicitud será revisada antes de publicarse.</p>
+  </div>
 
-<form action="/asociate" method="POST" class="w-50 mx-auto card p-4 shadow-sm">
-  <div class="mb-3">
-    <label class="form-label">Nombre del profesional o comercio</label>
-    <input type="text" class="form-control" name="nombre" required>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Rubro</label>
-    <input type="text" class="form-control" name="rubro" required>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Descripción del servicio</label>
-    <textarea class="form-control" name="descripcion" rows="3"></textarea>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Teléfono</label>
-    <input type="text" class="form-control" name="telefono" placeholder="Ej: 3512345678" required>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Email</label>
-    <input type="email" class="form-control" name="email" placeholder="tu@email.com" required>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Sitio web <span class="text-muted">(opcional)</span></label>
-    <input type="url" class="form-control" name="web" placeholder="https://...">
-  </div>
-  <button type="submit" class="btn btn-primary w-100">Enviar solicitud</button>
+  <div class="gc-form-card">
+    <form action="/asociate" method="POST">
 
-  {{#if message}}
-  <div class="alert alert-success mt-3 text-center" role="alert">
-    {{message}}
-  </div>
-{{/if}}
+      <div class="gc-field">
+        <label class="gc-label">Nombre del profesional o comercio</label>
+        <input type="text" class="gc-input" name="nombre" placeholder="Ej: Estudio Contable García" required>
+      </div>
 
-</form>
+      <div class="gc-field">
+        <label class="gc-label">Rubro</label>
+        <input type="text" class="gc-input" name="rubro" placeholder="Ej: Contabilidad, Salud, Gastronomía…" required>
+      </div>
+
+      <div class="gc-field">
+        <label class="gc-label">Descripción del servicio <span>(opcional)</span></label>
+        <textarea class="gc-textarea" name="descripcion" placeholder="Contá brevemente qué ofrecés…"></textarea>
+      </div>
+
+      <div class="gc-field">
+        <label class="gc-label">Teléfono</label>
+        <input type="text" class="gc-input" name="telefono" placeholder="3512345678" required>
+      </div>
+
+      <div class="gc-field">
+        <label class="gc-label">Email <span>(opcional)</span></label>
+        <input type="email" class="gc-input" name="email" placeholder="tu@email.com">
+      </div>
+
+      <div class="gc-field">
+        <label class="gc-label">Sitio web <span>(opcional)</span></label>
+        <input type="url" class="gc-input" name="web" placeholder="https://tu-sitio.com">
+      </div>
+
+      <button type="submit" class="gc-btn gc-btn-primary gc-form-submit">
+        <i class="bi bi-send"></i> Enviar solicitud
+      </button>
+    </form>
+
+    {{#if message}}
+    <div class="gc-alert gc-alert-success">
+      <i class="bi bi-check-circle-fill"></i>
+      {{message}}
+    </div>
+    {{/if}}
+  </div>
+
+  <p style="margin-top:20px;font-size:.8rem;color:var(--color-muted);text-align:center;">
+    ¿Ya estás registrado? <a href="/contacto">Contactanos</a> para modificar tus datos.
+  </p>
+</div>

@@ -1,69 +1,153 @@
-<h2 class="text-center mb-4">Panel de Administración</h2>
+<div class="gc-admin-layout">
 
-<div class="card p-4 shadow-sm mb-5 w-50 mx-auto">
-  <h5 class="mb-3">Agregar nuevo profesional</h5>
-  <form action="/admin" method="POST">
-    <div class="mb-3">
-      <label class="form-label">Nombre</label>
-      <input type="text" class="form-control" name="nombre" required>
+  <!-- PANEL HEADER -->
+  <div class="gc-panel-header">
+    <h2>Panel de Administración</h2>
+    <a href="/salir" class="gc-btn gc-btn-outline gc-btn-sm">
+      <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+    </a>
+  </div>
+
+  <!-- FORMULARIO DE ALTA -->
+  <div style="margin-bottom:40px;">
+    <div class="gc-form-card" style="max-width:100%;border-radius:var(--radius-md);padding:28px;">
+      <h3 style="font-size:1rem;font-weight:700;color:var(--color-dark);margin-bottom:20px;">
+        Agregar profesional
+      </h3>
+      <form action="/admin" method="POST">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="gc-field">
+            <label class="gc-label">Nombre</label>
+            <input type="text" class="gc-input" name="nombre" required>
+          </div>
+          <div class="gc-field">
+            <label class="gc-label">Rubro</label>
+            <input type="text" class="gc-input" name="rubro" required>
+          </div>
+        </div>
+        <div class="gc-field">
+          <label class="gc-label">Descripción</label>
+          <textarea class="gc-textarea" name="descripcion" style="min-height:80px;"></textarea>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+          <div class="gc-field">
+            <label class="gc-label">Teléfono</label>
+            <input type="text" class="gc-input" name="telefono" placeholder="3512345678" required>
+          </div>
+          <div class="gc-field">
+            <label class="gc-label">Email <span style="color:var(--color-muted);font-weight:400;">(opcional)</span></label>
+            <input type="email" class="gc-input" name="email">
+          </div>
+          <div class="gc-field">
+            <label class="gc-label">Sitio web <span style="color:var(--color-muted);font-weight:400;">(opcional)</span></label>
+            <input type="url" class="gc-input" name="web" placeholder="https://...">
+          </div>
+        </div>
+        <button type="submit" class="gc-btn gc-btn-primary gc-form-submit">
+          Agregar a la Guía
+        </button>
+      </form>
+      {{#if message}}
+      <div class="gc-alert gc-alert-success">
+        <i class="bi bi-check-circle-fill"></i> {{message}}
+      </div>
+      {{/if}}
     </div>
-    <div class="mb-3">
-      <label class="form-label">Rubro</label>
-      <input type="text" class="form-control" name="rubro" required>
+  </div>
+
+  <!-- TABLA -->
+  <div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
+      <h3 style="font-size:1rem;font-weight:700;color:var(--color-dark);display:flex;align-items:center;gap:8px;">
+        Profesionales registrados
+        <span class="gc-badge-count">{{profesionales.length}}</span>
+      </h3>
+      <div style="position:relative;">
+        <i class="bi bi-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--color-muted);font-size:.8rem;"></i>
+        <input type="text" id="adminSearch" placeholder="Filtrar tabla…" oninput="adminFiltrar(this.value)"
+          style="padding:7px 12px 7px 30px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:.8rem;font-family:inherit;outline:none;background:var(--color-surface);">
+      </div>
     </div>
-    <div class="mb-3">
-      <label class="form-label">Descripción</label>
-      <textarea class="form-control" name="descripcion" rows="3"></textarea>
+
+    <div class="gc-table-wrapper">
+      <table class="gc-table" id="adminTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Rubro</th>
+            <th>Descripción</th>
+            <th>Teléfono</th>
+            <th>Contacto</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each profesionales}}
+          <tr>
+            <td style="color:var(--color-muted);font-size:.8rem;">{{id}}</td>
+            <td><strong>{{nombre}}</strong></td>
+            <td><span class="gc-card-tag">{{rubro}}</span></td>
+            <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--color-muted);">{{descripcion}}</td>
+            <td>
+              {{#if telefono}}
+              <a href="tel:{{telefono}}" style="color:var(--color-dark-3);font-size:.85rem;display:flex;align-items:center;gap:4px;">
+                <i class="bi bi-telephone" style="color:var(--color-muted);"></i> {{telefono}}
+              </a>
+              {{else}}
+              <span style="color:var(--color-border);">—</span>
+              {{/if}}
+            </td>
+            <td>
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                {{#if web}}
+                  <a href="{{web}}" target="_blank" class="gc-btn gc-btn-outline gc-btn-sm">
+                    <i class="bi bi-globe"></i> Web
+                  </a>
+                {{/if}}
+                {{#if email}}
+                  <a href="mailto:{{email}}" class="gc-btn gc-btn-outline gc-btn-sm">
+                    <i class="bi bi-envelope"></i> Email
+                  </a>
+                {{/if}}
+                {{#unless web}}
+                  {{#unless email}}
+                    <span style="color:var(--color-border);">—</span>
+                  {{/unless}}
+                {{/unless}}
+              </div>
+            </td>
+            <td>
+              <form action="/admin/eliminar/{{id}}" method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que querés eliminar este registro?');">
+                <button type="submit" class="gc-btn gc-btn-danger gc-btn-sm">
+                  <i class="bi bi-trash3"></i> Eliminar
+                </button>
+              </form>
+            </td>
+          </tr>
+          {{else}}
+          <tr>
+            <td colspan="7">
+              <div class="gc-empty" style="padding:40px;">
+                <div class="gc-empty-icon"><i class="bi bi-inbox"></i></div>
+                <h3>Sin registros</h3>
+                <p>Usá el formulario de la izquierda para agregar el primero.</p>
+              </div>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
     </div>
-    <div class="mb-3">
-      <label class="form-label">Email</label>
-      <input type="email" class="form-control" name="email">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Teléfono</label>
-      <input type="text" class="form-control" name="telefono" placeholder="Ej: 3512345678">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Sitio web (opcional)</label>
-      <input type="url" class="form-control" name="web" placeholder="https://...">
-    </div>
-    <button type="submit" class="btn btn-success w-100">Agregar a la Guía</button>
-  </form>
-  {{#if message}}
-    <div class="alert alert-success mt-3 text-center">{{message}}</div>
-  {{/if}}
+  </div>
 </div>
 
-<h5 class="mb-3">Profesionales registrados</h5>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Rubro</th>
-      <th>Descripción</th>
-      <th>Teléfono</th>
-      <th>Contacto</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each profesionales}}
-    <tr>
-      <td>{{id}}</td>
-      <td>{{nombre}}</td>
-      <td>{{rubro}}</td>
-      <td>{{descripcion}}</td>
-      <td>{{telefono}}</td>
-      <td>
-        {{#if web}}<a href="{{web}}" target="_blank">Web</a>{{else if email}}<a href="mailto:{{email}}">Email</a>{{/if}}
-      </td>
-      <td>
-        <form action="/admin/eliminar/{{id}}" method="POST" style="display:inline">
-          <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-        </form>
-      </td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+<script>
+  function adminFiltrar(q) {
+    q = q.toLowerCase();
+    document.querySelectorAll('#adminTable tbody tr').forEach(row => {
+      row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  }
+</script>
+

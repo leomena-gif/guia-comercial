@@ -9,30 +9,18 @@ router.get('/', function(req, res, next) {
     if (err) {
       return next(err);
     }
-    res.render('index', { profesionales: results });
+    res.render('index', { profesionales: results, isHome: true });
   });
 });
 
-router.get('/eventos', function(req, res, next) {
-  db.query('SELECT * FROM eventos', function(err, results) {
-    if (err) {
-      return next(err);
-    }
-    res.render('eventos', { eventos: results });
-  });
-});
-
-/* GET asociate. */
 router.get('/asociate', function(req, res, next) {
-  res.render('asociate');
+  res.render('asociate', { isAsociate: true });
 });
 
-/* GET contacto. */
 router.get('/contacto', function(req, res, next) {
-  res.render('contacto');
+  res.render('contacto', { isContacto: true });
 });
 
-/* POST contacto. */
 router.post('/contacto', async function(req, res, next) {
   var nombre = req.body.nombre;
   var email = req.body.email;
@@ -50,7 +38,7 @@ router.post('/contacto', async function(req, res, next) {
     port: 2525,
     auth: {
       user: "53df92d3fb4285",
-      pass: "6cf3613bf8a8e6" 
+      pass: "6cf3613bf8a8e6"
     }
   });
 
@@ -61,7 +49,6 @@ router.post('/contacto', async function(req, res, next) {
   });
 });
 
-/* POST asociate. */
 router.post('/asociate', async function(req, res, next) {
   var nombre = req.body.nombre;
   var rubro = req.body.rubro;
@@ -93,7 +80,6 @@ router.post('/asociate', async function(req, res, next) {
   });
 });
 
-/* GET admin. */
 router.get('/admin', function(req, res, next) {
   if (!req.session.admin) {
     return res.redirect('/login');
@@ -104,7 +90,7 @@ router.get('/admin', function(req, res, next) {
   });
 });
 
-/* POST admin - agregar profesional. */
+/* Agregar profesional */
 router.post('/admin', function(req, res, next) {
   if (!req.session.admin) {
     return res.redirect('/login');
@@ -118,7 +104,7 @@ router.post('/admin', function(req, res, next) {
 
   db.query(
     'INSERT INTO profesionales (nombre, rubro, descripcion, email, telefono, web) VALUES (?, ?, ?, ?, ?, ?)',
-    [nombre, rubro, descripcion, email, telefono || null, web || null],
+    [nombre, rubro, descripcion, email || null, telefono, web || null],
     function(err, results) {
       if (err) return next(err);
       db.query('SELECT * FROM profesionales', function(err, profesionales) {
@@ -132,7 +118,7 @@ router.post('/admin', function(req, res, next) {
   );
 });
 
-/* POST admin - eliminar profesional. */
+/* Eliminar profesional */
 router.post('/admin/eliminar/:id', function(req, res, next) {
   var id = req.params.id;
   db.query('DELETE FROM profesionales WHERE id = ?', [id], function(err) {
@@ -140,13 +126,12 @@ router.post('/admin/eliminar/:id', function(req, res, next) {
     res.redirect('/admin');
   });
 });
-/* GET login. */
-router.get('/login', function(req, res, next) {
+
+router.get('/login', function(req, res) {
   res.render('login');
 });
 
-/* POST login. */
-router.post('/login', function(req, res, next) {
+router.post('/login', function(req, res) {
   var usuario = req.body.usuario;
   var password = req.body.password;
 
@@ -158,7 +143,7 @@ router.post('/login', function(req, res, next) {
   }
 });
 
-/* GET logout. */
+/* Cerrar sesión */
 router.get('/salir', function(req, res, next) {
   req.session.destroy();
   res.redirect('/login');

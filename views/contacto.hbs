@@ -1,23 +1,37 @@
-<h2 class="text-center mb-4">Contacto y Soporte</h2>
-<p class="text-center mb-4">¿Encontraste un error o quieres dar de baja tu anuncio? Escríbenos.</p>
+<div class="gc-form-page">
+  <div class="gc-form-header">
+    <h2>Contacto y Soporte</h2>
+    <p>¿Encontraste un error o querés dar de baja tu anuncio? Estamos para ayudarte.</p>
+  </div>
 
-<form action="/contacto" method="POST" class="w-50 mx-auto card p-4 shadow-sm">
-  <div class="mb-3">
-    <label class="form-label">Tu Nombre</label>
-    <input type="text" class="form-control" name="nombre" required>
+  <div class="gc-form-card">
+    <form action="/contacto" method="POST">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="gc-field">
+          <label class="gc-label">Tu nombre</label>
+          <input type="text" class="gc-input" name="nombre" placeholder="Nombre completo" required>
+        </div>
+        <div class="gc-field">
+          <label class="gc-label">Email</label>
+          <input type="email" class="gc-input" name="email" placeholder="tu@email.com" required>
+        </div>
+      </div>
+
+      <div class="gc-field">
+        <label class="gc-label">Mensaje</label>
+        <textarea class="gc-textarea" name="mensaje" placeholder="Describí tu consulta o problema…" required style="min-height:130px;"></textarea>
+      </div>
+
+      <button type="submit" class="gc-btn gc-btn-primary gc-form-submit">
+        <i class="bi bi-send"></i> Enviar mensaje
+      </button>
+    </form>
+
+    {{#if message}}
+    <div class="gc-alert gc-alert-success">
+      <i class="bi bi-check-circle-fill"></i>
+      {{message}}
+    </div>
+    {{/if}}
   </div>
-  <div class="mb-3">
-    <label class="form-label">Email</label>
-    <input type="email" class="form-control" name="email" required>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Mensaje</label>
-    <textarea class="form-control" name="mensaje" rows="4" required></textarea>
-  </div>
-  <button type="submit" class="btn btn-success w-100">Enviar Mensaje</button>
-  {{#if message}}
-  <div class="alert alert-success mt-3 text-center" role="alert">
-    {{message}}
-  </div>
-{{/if}}
-</form>
+</div>

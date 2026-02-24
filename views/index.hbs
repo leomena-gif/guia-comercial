@@ -1,25 +1,80 @@
-<h1 class="text-center mb-4">Directorio de Profesionales y Comercios</h1>
+<!-- HERO -->
+<div class="gc-hero" style="margin:0 -24px;padding-bottom:60px;">
+  <h1>Encontrá profesionales<br>y comercios cerca tuyo</h1>
 
-<div class="row">
-  {{#each profesionales}}
-    <div class="col-md-4 mb-4">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">{{nombre}}</h5>
-          <span class="badge bg-info text-dark mb-2">{{rubro}}</span>
-          <p class="card-text">{{descripcion}}</p>
-          {{#if telefono}}
-            <p class="card-text mb-1">
-              <small class="text-muted"><i class="bi bi-telephone"></i> {{telefono}}</small>
-            </p>
-          {{/if}}
-          {{#if web}}
-            <a href="{{web}}" target="_blank" class="btn btn-outline-primary btn-sm mt-2">Visitar sitio web</a>
-          {{else if email}}
-            <a href="mailto:{{email}}" class="btn btn-outline-secondary btn-sm mt-2">Enviar email</a>
-          {{/if}}
-        </div>
+  <!-- SEARCH dentro del hero -->
+  <div style="max-width:600px;margin:32px auto 0;">
+    <div class="gc-search-inner" style="background:rgba(255,255,255,.97);padding:8px 8px 8px 20px;border-radius:var(--radius-xl);box-shadow:0 8px 40px rgba(0,0,0,.35);border:none;">
+      <input type="text" id="searchInput" placeholder="Buscar por nombre, rubro o descripción…" autocomplete="off"
+        style="font-size:1rem;">
+      <button class="gc-btn gc-btn-primary" onclick="filtrarProfesionales()" style="flex-shrink:0;width:44px;height:44px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:1.1rem;">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- DIRECTORIO -->
+<section class="gc-section">
+  <!-- Grid de profesionales -->
+  <div class="gc-grid" id="proGrid">
+    {{#each profesionales}}
+    <div class="gc-card" data-nombre="{{nombre}}" data-rubro="{{rubro}}" data-desc="{{descripcion}}">
+      <span class="gc-card-tag">{{rubro}}</span>
+      <h3 class="gc-card-title" style="margin-top:8px;">{{nombre}}</h3>
+
+      {{#if descripcion}}
+      <p class="gc-card-desc">{{descripcion}}</p>
+      {{/if}}
+
+      <div class="gc-card-footer">
+        {{#if telefono}}
+          <a href="tel:{{telefono}}" class="gc-btn gc-btn-outline gc-btn-sm">Llamar</a>
+        {{/if}}
+        {{#if email}}
+          <a href="mailto:{{email}}" class="gc-btn gc-btn-outline gc-btn-sm">Email</a>
+        {{/if}}
+        {{#if web}}
+          <a href="{{web}}" target="_blank" rel="noopener" class="gc-btn gc-btn-outline gc-btn-sm">Web</a>
+        {{/if}}
       </div>
     </div>
-  {{/each}}
-</div>
+    {{else}}
+    <div class="gc-empty" style="grid-column:1/-1;">
+      <div class="gc-empty-icon"><i class="bi bi-shop"></i></div>
+      <h3>Aún no hay profesionales</h3>
+      <p>Sé el primero en sumarte a la guía.</p>
+      <a href="/asociate" class="gc-btn gc-btn-primary" style="margin-top:16px;">
+        <i class="bi bi-plus-circle"></i> Agregar mi comercio
+      </a>
+    </div>
+    {{/each}}
+  </div>
+
+  <!-- Sin resultados de búsqueda -->
+  <div id="noResults" class="gc-empty" style="display:none;">
+    <div class="gc-empty-icon"><i class="bi bi-search"></i></div>
+    <h3>Sin resultados</h3>
+    <p>Probá con otro término de búsqueda.</p>
+  </div>
+</section>
+
+<script>
+  // Búsqueda en tiempo real
+  const cards = document.querySelectorAll('#proGrid .gc-card');
+  document.getElementById('searchInput').addEventListener('input', filtrarProfesionales);
+
+  function filtrarProfesionales() {
+    const q = document.getElementById('searchInput').value.toLowerCase().trim();
+    let visible = 0;
+    cards.forEach(card => {
+      const match = !q ||
+        card.dataset.nombre.toLowerCase().includes(q) ||
+        card.dataset.rubro.toLowerCase().includes(q) ||
+        card.dataset.desc.toLowerCase().includes(q);
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    document.getElementById('noResults').style.display = visible === 0 && q ? 'block' : 'none';
+  }
+</script>
